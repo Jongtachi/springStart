@@ -10,6 +10,9 @@ public class MemberServiceTest {
     // 세미콜론까지 되는 거 ctrl + shift + enter
     MemberService memberService ;
 
+    /**
+     * BeforeEach가 먼저 실행되고 join이 실행된다.
+     * */
     @BeforeEach
     public void beforeEach(){
         AppConfig appConfig = new AppConfig();
