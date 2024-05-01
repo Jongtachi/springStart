@@ -17,9 +17,27 @@ public class AppConfig {
     /**
      *  각 메서드명을 보는 순간 역할이 드러난다.
      **/
+
+    // @Bean memberService -> new MemoryMemberRepository()
+    // @Bean orderService -> new MemoryMemberRepository()
+    // 이걸 보면 싱글톤이 깨지는 게 아닌가? 생각한다.
+
+    /*예상 기대값*/
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // call AppConfig.memberRepository
+
+    /*실제 결과물 (각 하나씩만 호출된다.)*/
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+
     @Bean
     public MemberService memberService(){
         // 생성자 주입
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
@@ -28,6 +46,7 @@ public class AppConfig {
     @Bean
     public OrderService orderService(){
         // 생성자 주입
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(
                 memberRepository(),
                 discountPolicy()
@@ -37,6 +56,7 @@ public class AppConfig {
     /** 회원 저장소 역할 */
     @Bean
     public MemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
