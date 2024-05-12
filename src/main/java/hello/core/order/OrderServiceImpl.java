@@ -16,8 +16,43 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+
+    /** 2. set */
+//    private MemberRepository memberRepository;
+//    private DiscountPolicy discountPolicy;
+//
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+////        System.out.println("memberRepository = " + memberRepository);
+//        this.memberRepository = memberRepository;
+//    }
+//
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+////        System.out.println("discountPolicy = " + discountPolicy);
+//        this.discountPolicy = discountPolicy;
+//    }
+    /** set 끝*/
+
+    /** 3. 필드주입 -> 사용하지말자 ^-^*/
+    //  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {}은 주석처리 하고 실행
+//    @Autowired private MemberRepository memberRepository;
+//    @Autowired private DiscountPolicy discountPolicy;
+
+    /** 필드주입 끝*/
+
+
+    // 생성자가 2개이면 @Autowired를 꼭 지정해줘야한다.
+    // 생성자가 하나일땐 @Autowired를 생략해도 자동 주입 된다.
+    /*
+    public OrderServiceImpl() {
+    }
+    */
+
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        System.out.println("memberRepository = " + memberRepository);
+//        System.out.println("discountPolicy = " + discountPolicy);
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
