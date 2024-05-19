@@ -27,8 +27,8 @@ import org.springframework.context.annotation.FilterType;
 )
 public class AutoAppConfig {
     // 수동으로 등록
-    @Bean(name = "memoryMemberRepository")
+    /*@Bean(name = "memoryMemberRepository")
     MemberRepository memberRepository() {
         return new MemoryMemberRepository();
-    }
+    }*/
 }
