@@ -13,6 +13,11 @@ import org.springframework.stereotype.Component;
 public class OrderServiceImpl implements OrderService{
 
     // OrderServiceImpl 파일은 계산 같은 건 안하고 보여주기만 한다.
+
+    /*final 선언 : 한번 정해지면 안 바뀐다.
+    final 선언을 하면 좋은점 : 생성자를 안 만들었을 때 compile 오류가 나 사전에 잘못 됐다고 알려줌
+    기억하자! "컴파일 오류는 세상에서 가장 빠르고, 좋은 오류다."
+    * */
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
@@ -49,7 +54,18 @@ public class OrderServiceImpl implements OrderService{
     }
     */
 
-    @Autowired
+    // 수정자 주입//
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository){
+//        this.memberRepository = memberRepository;
+//    }
+//
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy){
+//        this.discountPolicy = discountPolicy;
+//    }
+    // 수정자 주입 끝//
+
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
 //        System.out.println("memberRepository = " + memberRepository);
 //        System.out.println("discountPolicy = " + discountPolicy);
@@ -60,6 +76,12 @@ public class OrderServiceImpl implements OrderService{
     /*OCP 위반*/
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
     //private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+
+//    @Autowired
+//    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
+//        this.memberRepository = memberRepository;
+//        this.discountPolicy = discountPolicy;
+//    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
