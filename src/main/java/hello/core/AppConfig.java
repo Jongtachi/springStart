@@ -47,11 +47,11 @@ public class AppConfig {
     public OrderService orderService(){
         // 생성자 주입
         System.out.println("call AppConfig.orderService");
-        /*return new OrderServiceImpl(
+        return new OrderServiceImpl(
                 memberRepository(),
                 discountPolicy()
-        );*/
-        return null;
+        );
+        //return null;
     }
 
     /** 회원 저장소 역할 */

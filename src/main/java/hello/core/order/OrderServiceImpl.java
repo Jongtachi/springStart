@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
 
     // OrderServiceImpl 파일은 계산 같은 건 안하고 보여주기만 한다.
@@ -68,12 +68,12 @@ public class OrderServiceImpl implements OrderService{
 //    }
     // 수정자 주입 끝//
 
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-////        System.out.println("memberRepository = " + memberRepository);
-////        System.out.println("discountPolicy = " + discountPolicy);
-//        this.memberRepository = memberRepository;
-//        this.discountPolicy = discountPolicy;
-//    }
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        System.out.println("memberRepository = " + memberRepository);
+//        System.out.println("discountPolicy = " + discountPolicy);
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     /*OCP 위반*/
     //private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
