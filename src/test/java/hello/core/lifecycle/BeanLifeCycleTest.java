@@ -16,7 +16,9 @@ public class BeanLifeCycleTest {
     }
     @Configuration
     static class LifeCycleConfig{
-        @Bean
+
+        /** destroyMethod 기능을 쓰고 싶지 않으면 destroyMethod=""처럼 공백을 넣어준다.*/
+        @Bean(initMethod = "init", destroyMethod = "close")
         public NetworkClient networkClient(){
             NetworkClient networkClient = new NetworkClient();
             networkClient.setUrl("http://hello-spring.dev");
