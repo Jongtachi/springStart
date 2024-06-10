@@ -3,6 +3,7 @@ package hello.core.web;
 import hello.core.common.MyLogger;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,17 +13,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final MyLogger myLogger;
+    private final ObjectProvider<MyLogger> myLoggerProvider;
 
     // 문자를 바로 봔환하기 위해 @ResponseBody 사용
     @RequestMapping("log-demo")
     @ResponseBody
-    public String logDemo(HttpServletRequest request){
+    public String logDemo(HttpServletRequest request) throws InterruptedException {
         String requestURL = request.getRequestURL().toString();
+        MyLogger myLogger = myLoggerProvider.getObject();
         myLogger.setRequestURL(requestURL);
 
         myLogger.log("controller test");
-        logDemoService.logic("Test");
+        
+        // 1초 뒤 service 실행 그 사이 다른 고객들이 들어와도 uuid는 고객마다 다르게 유지 
+        Thread.sleep(1000);
+        logDemoService.logic("testId");
         return "OK";
     }
 }
